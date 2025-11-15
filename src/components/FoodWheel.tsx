@@ -109,7 +109,7 @@ export default function FoodWheel() {
   };
 
   const checkAchievements = () => {
-    const newAchievements = [];
+    const newAchievements: string[] = [];
     
     if (spinCount === 1) newAchievements.push('首次旋转');
     if (spinCount === 10) newAchievements.push('旋转达人');

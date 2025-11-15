@@ -26,13 +26,18 @@ export default function FictionalMenu() {
     setLoading(true);
     setError('');
     try {
-      const menuData = await generateFictionalMenu();
+      const menuName = await generateFictionalMenu();
       const savedReactions = JSON.parse(localStorage.getItem('menuReactions') || '{}');
-      const menuWithReactions = menuData.map((item: MenuItem) => ({
-        ...item,
-        reaction: savedReactions[item.name] || undefined
-      }));
-      setMenu(menuWithReactions);
+      
+      // 将生成的菜单名称转换为菜单项格式
+      const menuItem: MenuItem = {
+        name: menuName,
+        description: '一道充满想象力的创意料理，每一口都是惊喜的体验',
+        price: `¥${Math.floor(Math.random() * 200) + 50}`,
+        reaction: savedReactions[menuName] || undefined
+      };
+      
+      setMenu([menuItem]);
     } catch (err) {
       setError('生成虚构菜单失败，请稍后重试');
       // 备用菜单
